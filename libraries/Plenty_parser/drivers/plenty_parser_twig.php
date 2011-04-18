@@ -34,14 +34,7 @@ class Plenty_parser_twig extends CI_Driver {
         
         $this->_template_dir = config_item('parser.twig.location');
         $this->_cache_dir    = config_item('parser.twig.cache_location');
-        $this->_debug        = config_item('parser.twig.debug');
-
-        $loader = new Twig_Loader_Filesystem($this->_template_dir);
-
-        $this->_twig = new Twig_Environment($loader, array(
-            'cache' => $this->_cache_dir,
-            'debug' => $this->_debug,
-        ));      
+        $this->_debug        = config_item('parser.twig.debug');     
     }
     
     /**
@@ -64,7 +57,14 @@ class Plenty_parser_twig extends CI_Driver {
     */
 	public function parse($template, $data = array(), $return = false)
     {
-        $template = $this->_twig->loadTemplate($template);
+        $loader = new Twig_Loader_Filesystem($this->_template_dir);
+
+        $twig = new Twig_Environment($loader, array(
+            'cache' => $this->_cache_dir,
+            'debug' => $this->_debug,
+        ));
+         
+        $template = $twig->loadTemplate($template);
         
         if (is_array($data))
         {
@@ -92,8 +92,24 @@ class Plenty_parser_twig extends CI_Driver {
     */
     public function parse_string($string, $data = array(), $return = false)
     {
-        // Coming soon
-        return true;
+        $loader = new Twig_Loader_String();
+
+        $twig = new Twig_Environment($loader, array(
+            'cache' => $this->_cache_dir,
+            'debug' => $this->_debug,
+        ));
+        
+        $string = $twig->loadTemplate($string);
+        
+        if ($return === true)
+        {
+            return $template->render($data);
+        }
+        else
+        {
+            return $template->display($data);
+        }
+        
     }
 
 }
