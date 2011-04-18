@@ -10,7 +10,7 @@
 */
 
 // Default driver to render views with
-$config['parser.driver'] = "twig";
+$config['parser.driver'] = "smarty";
 
 // Twig template extension (default)
 $config['parser.twig.extension'] = ".twig";
