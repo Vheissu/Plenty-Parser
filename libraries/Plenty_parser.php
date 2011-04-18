@@ -18,22 +18,37 @@ class Plenty_parser extends CI_Driver_Library {
     protected $ci;
     
     /**
-    * The driver to use for templates
+    * Current template extension
+    * 
+    * @var mixed
+    */
+    protected $_current_template = '';
+    
+    /**
+    * The driver to use for rendering
     * 
     * @var mixed
     */
     protected $_current_driver;
     
+    /**
+    * Valid drivers for rendering views
+    * 
+    * @var mixed
+    */
     protected $valid_drivers = array(
         'plenty_parser_smarty',
         'plenty_parser_dwoo',
         'plenty_parser_twig',
     );
     
+    /**
+    * Constructor
+    * 
+    */
     public function __construct()
     {
         $this->ci = get_instance();
-        
         $this->ci->config->load('plentyparser');
     }
     
@@ -43,35 +58,38 @@ class Plenty_parser extends CI_Driver_Library {
     * @param mixed $template
     * @param mixed $data
     */
-    public function parse($template, $data = array())
+    public function parse($template, $data = array(), $return = false)
     {
+        // Store the template name
+        $this->_current_template = $template;
         
-    }
+        // Autodetect the extension or whatever
+        $this->autodetect();
+        
+        // Call the driver parser function
+        return $this->{$this->_current_driver}->parse($template, $data, $return);
+    } 
     
     /**
-    * Display will show the template
-    * 
-    * @param mixed $template
-    * @param mixed $data
-    */
-    public function display($template, $data = array())
-    {
-        
-    }
-    
-    /**
-    * Are we autodetecting which template engine to use?
+    * Check what rendering driver to use for displaying templates
     * 
     */
     private function autodetect()
     {
+        // If we are autodetecting, then set the render
         if ( config_item('parser.auto') == true )
         {
-            
+            // Check we have a template
+            if (!empty($this->_current_template))
+            {
+                // Get the extension
+                $ext = substr(strrchr($this->_current_template,'.'),1);
+            }
         }
         else
         {
-            return false;
+            // Set the current driver to be the default driver
+            $this->_current_driver = config_item('parser.driver');
         }   
     }
     

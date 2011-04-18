@@ -12,8 +12,6 @@
 
 class Plenty_parser_twig extends CI_Driver {
     
-    protected $ci;
-    
     protected $_template;
     protected $_twig;
     
@@ -60,25 +58,18 @@ class Plenty_parser_twig extends CI_Driver {
     * @param mixed $data
     * @returns string
     */
-	public function parse($template, $data = array())
+	public function parse($template, $data = array(), $return = false)
     {
         $template = $this->_twig->loadTemplate($template);
-
-        return $template->render($data);
-    }
-    
-    /**
-    * Displays an actual template for use
-    * 
-    * @param mixed $template
-    * @param mixed $data
-    * @returns void
-    */
-    public function display($template, $data = array()) 
-    {
-        $template = $this->_twig->loadTemplate($template);
-
-        $template->display($data);
+        
+        if ($return === true)
+        {
+            return $template->render($data);   
+        }
+        else
+        {
+            return $template->display($data); 
+        }
     }
 
 }
