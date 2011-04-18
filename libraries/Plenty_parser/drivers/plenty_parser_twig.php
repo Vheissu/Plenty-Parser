@@ -15,7 +15,6 @@ class Plenty_parser_twig extends CI_Driver {
     protected $ci;
     
     protected $_template;
-    protected $_twig;
     
     protected $_template_dir;
     protected $_cache_dir;
@@ -58,11 +57,7 @@ class Plenty_parser_twig extends CI_Driver {
 	public function parse($template, $data = array(), $return = false)
     {
         $loader = new Twig_Loader_Filesystem($this->_template_dir);
-
-        $twig = new Twig_Environment($loader, array(
-            'cache' => $this->_cache_dir,
-            'debug' => $this->_debug,
-        ));
+        $twig   = new Twig_Environment($loader, array('cache' => $this->_cache_dir,'debug' => $this->_debug));
          
         $template = $twig->loadTemplate($template);
         
@@ -100,6 +95,11 @@ class Plenty_parser_twig extends CI_Driver {
         ));
         
         $string = $twig->loadTemplate($string);
+        
+        if (is_array($data))
+        {
+            $data = array_merge($data, $this->ci->load->_ci_cached_vars);
+        }
         
         if ($return === true)
         {
