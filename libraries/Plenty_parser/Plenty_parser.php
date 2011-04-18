@@ -32,6 +32,20 @@ class Plenty_parser extends CI_Driver_Library {
     protected $_current_theme;
     
     /**
+    * Get default theme (if any)
+    * 
+    * @var mixed
+    */
+    protected $_default_theme;
+    
+    /**
+    * Theme locations
+    * 
+    * @var mixed
+    */
+    protected $_theme_locations;
+    
+    /**
     * Valid drivers for rendering views
     * 
     * @var mixed
@@ -52,6 +66,12 @@ class Plenty_parser extends CI_Driver_Library {
         
         // Get our default driver
         $this->_current_driver = config_item('parser.driver');
+        
+        // Get theme locations
+        $this->_theme_locations = config_item('parser.theme.locations');
+        
+        // Get default theme (if one set)
+        $this->_default_theme = config_item('parser.theme.default');
     }
     
     /**
