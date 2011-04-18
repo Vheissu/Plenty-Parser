@@ -1,11 +1,20 @@
 <?php
 
+/**
+* @name Plenty Parser
+* @subpackage Config
+* @copyright 2011
+* @author Dwayne Charrington
+* @license http://philsturgeon.co.uk/code/dbad-license
+* @version 1.0
+*/
+
 // Default driver to render views with (auto mode below overrides this if enabled)
 $config['parser.driver'] = "smarty";
 
 // Should the parser library autodetect what driver to use?
 // If true, then a list of default extensions should be defined
-$config['parser.auto']   = "false";
+$config['parser.auto']   = false;
 
 // Default autodriver extensions
 $config['parser.extensions'] = array(
