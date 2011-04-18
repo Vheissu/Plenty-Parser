@@ -84,6 +84,20 @@ class Plenty_parser extends CI_Driver_Library {
             {
                 // Get the extension
                 $ext = substr(strrchr($this->_current_template,'.'),1);
+                
+                // Array of mapped extensions for autodetection
+                $extensions = config_item('parser.extensions');
+                
+                // If the extension has been mapped, then use it
+                if ( array_key_exists($ext, $extensions) )
+                {
+                    $this->_current_driver = $extensions[$ext];
+                }
+                else
+                {
+                    show_error('Looks like that extension doesn\'t exist. Please define it in your list of extensions if you wish to use autodetection. Extension: '.$ext.'');
+                }
+                
             }
         }
         else
