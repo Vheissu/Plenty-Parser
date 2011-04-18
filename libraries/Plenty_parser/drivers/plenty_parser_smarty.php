@@ -34,10 +34,37 @@ class Plenty_parser_smarty extends CI_Driver {
         $this->_smarty->config_dir        = config_item('parser.smarty.config_dir');
         $this->_smarty->error_reporting   = config_item('parser.smarty.error_level');
         
-        $this->_smarty->exception_handler = null;
-          
+        $this->_smarty->exception_handler = null; 
     }
     
+    /**
+    * Assign Var
+    * Assign a variable for template view use
+    * 
+    * @param mixed $name
+    * @param mixed $val
+    * @returns void
+    */
+    public function assign_var($name, $val)
+    {
+        // If an empty variable name or value supplied
+        if (empty($name) OR empty($val))
+        {
+            show_error('Smarty assign var function expects a name and value for assigning variables');
+        }
+        
+        // Call Smarty assign function
+        $this->_smarty->assign($name, $val);
+    }
+    
+    /**
+    * Parse
+    * Display or return template contents
+    * 
+    * @param mixed $template
+    * @param array $data
+    * @param mixed $return
+    */
     public function parse($template, $data = array(), $return = false)
     {
         // Check we haven't got cached variables to use
@@ -64,7 +91,19 @@ class Plenty_parser_smarty extends CI_Driver {
         {
             $this->_smarty->display($template);
         }
-                
+    }
+    
+    /**
+    * Parse string
+    * Parses a string as a template and can be returned or displayed
+    * 
+    * @param mixed $string
+    * @param mixed $data
+    * @param mixed $return
+    */
+    public function parse_string($string, $data = array(), $return = false)
+    {
+        return $this->_smarty->fetch('string:'.$string, $data);
     }
 
 }

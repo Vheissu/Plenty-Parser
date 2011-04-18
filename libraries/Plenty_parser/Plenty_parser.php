@@ -48,10 +48,36 @@ class Plenty_parser extends CI_Driver_Library {
     }
     
     /**
+    * Set Driver
+    * Sets which driver to use for view rendering
+    * 
+    * @param mixed $driver
+    * @returns void
+    */
+    public function set_driver($driver)
+    {
+        $this->_current_driver = trim($driver);
+    }
+    
+    /**
+    * Assign Var
+    * Set a variable name and value for a template
+    * 
+    * @param mixed $name
+    * @param mixed $value
+    * @returns void
+    */
+    public function assign_var($name, $value)
+    {
+        return $this->{$this->_current_driver}->assign_var($name, $value);
+    }
+    
+    /**
     * Parse will return the contents instead of displaying
     * 
     * @param mixed $template
     * @param mixed $data
+    * @returns void
     */
     public function parse($template, $data = array(), $return = false, $driver = '')
     {
@@ -67,6 +93,7 @@ class Plenty_parser extends CI_Driver_Library {
             $template = $template.config_item('parser.'.$this->_current_driver.'.extension');
         }
         
+        // Call the driver parse function
         return $this->{$this->_current_driver}->parse($template, $data, $return);
     } 
     

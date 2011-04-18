@@ -12,6 +12,15 @@
 // Default driver to render views with
 $config['parser.driver'] = "smarty";
 
+// Where are themes located?
+$config['parser.themes.location'] = APPPATH . "themes";
+
+// Default theme to use
+$config['parser.themes.default'] = "";
+
+
+
+
 // Twig template extension (default)
 $config['parser.twig.extension'] = ".twig";
 
