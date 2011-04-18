@@ -62,6 +62,11 @@ class Plenty_parser_twig extends CI_Driver {
     {
         $template = $this->_twig->loadTemplate($template);
         
+        if (is_array($data))
+        {
+            $data = array_merge($data, $this->ci->load->_ci_cached_vars);
+        }
+        
         if ($return === true)
         {
             return $template->render($data);   

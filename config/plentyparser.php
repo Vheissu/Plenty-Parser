@@ -32,6 +32,8 @@ $config['parser.twig.cache_location'] = APPPATH . "cache";
 // Debug mode turned on or off for Twig?
 $config['parser.twig.debug'] = false;
 
+
+
 // Default location for finding Smarty templates
 $config['parser.smarty.location'] = APPPATH . "views";
 
@@ -40,3 +42,9 @@ $config['parser.smarty.compile_dir'] = APPPATH . "cache/smarty/compiled";
 
 // Where Smarty caching happens
 $config['parser.smarty.cache_dir'] = APPPATH . "cache/smarty";
+
+// Smarty configs directory
+$config['parser.smarty.config_dir'] = APPPATH."third_party/Smarty/configs";
+
+// Smarty error level
+$config['parser.smarty.error_level'] = "E_ERROR";
