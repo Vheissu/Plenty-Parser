@@ -12,6 +12,9 @@
 // Default driver to render views with
 $config['parser.driver'] = "twig";
 
+// Twig template extension (default)
+$config['parser.twig.extension'] = ".twig";
+
 // Default template location
 $config['parser.twig.location'] = APPPATH . "views";
 
@@ -22,6 +25,9 @@ $config['parser.twig.cache_location'] = APPPATH . "cache/twig";
 $config['parser.twig.debug'] = false;
 
 
+
+// Smarty template extension (default)
+$config['parser.smarty.extension'] = ".php";
 
 // Default location for finding Smarty templates
 $config['parser.smarty.location'] = APPPATH . "views";

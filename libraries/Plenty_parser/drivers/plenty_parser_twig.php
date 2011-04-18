@@ -12,6 +12,8 @@
 
 class Plenty_parser_twig extends CI_Driver {
     
+    protected $ci;
+    
     protected $_template;
     protected $_twig;
     
@@ -21,6 +23,9 @@ class Plenty_parser_twig extends CI_Driver {
     
     public function __construct()
     {
+        
+        $this->ci = get_instance();
+        
         ini_set('include_path',
         ini_get('include_path') . PATH_SEPARATOR . APPPATH . 'third_party/Twig');
 
@@ -28,9 +33,9 @@ class Plenty_parser_twig extends CI_Driver {
         
         Twig_Autoloader::register();
         
-        $this->_template_dir = $this->ci->config->item('parser.twig.location');
-        $this->_cache_dir    = $this->ci->config->item('parser.twig.cache_location');
-        $this->_debug        = $this->ci->config->item('parser.twig.debug');
+        $this->_template_dir = config_item('parser.twig.location');
+        $this->_cache_dir    = config_item('parser.twig.cache_location');
+        $this->_debug        = config_item('parser.twig.debug');
 
         $loader = new Twig_Loader_Filesystem($this->_template_dir);
 
