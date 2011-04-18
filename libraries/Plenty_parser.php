@@ -32,13 +32,19 @@ class Plenty_parser extends CI_Driver_Library {
     protected $_current_driver;
     
     /**
+    * Extension of current template (if any)
+    * 
+    * @var mixed
+    */
+    protected $_ext;
+    
+    /**
     * Valid drivers for rendering views
     * 
     * @var mixed
     */
     protected $valid_drivers = array(
         'plenty_parser_smarty',
-        'plenty_parser_dwoo',
         'plenty_parser_twig',
     );
     
@@ -66,8 +72,24 @@ class Plenty_parser extends CI_Driver_Library {
         // Autodetect the extension or whatever
         $this->autodetect();
         
-        // Call the driver parser function
-        return $this->{$this->_current_driver}->parse($template, $data, $return);
+        // If we are wanting to use the in-built parser
+        if ($this->_current_driver == "parser")
+        {
+            $this->ci->load->library('parser');
+            $render =  $this->_ci->parser->parse($template, $data, $return);
+        }
+        // If we want to use the Codeigniter standard view loader
+        elseif ($this->_current_driver == "view")
+        {
+            $render = $this->load->view($template, $data, $return);
+        }
+        else
+        {
+            $render = $this->{$this->_current_driver}->parse($template, $data, $return);
+            
+            // Call whatever method we are doing
+            return $render;
+        }
     } 
     
     /**
@@ -83,7 +105,7 @@ class Plenty_parser extends CI_Driver_Library {
             if (!empty($this->_current_template))
             {
                 // Get the extension
-                $ext = substr(strrchr($this->_current_template,'.'),1);
+                $$this->_ext = substr(strrchr($this->_current_template,'.'),1);
                 
                 // Array of mapped extensions for autodetection
                 $extensions = config_item('parser.extensions');
@@ -91,7 +113,7 @@ class Plenty_parser extends CI_Driver_Library {
                 // If the extension has been mapped, then use it
                 if ( array_key_exists($ext, $extensions) )
                 {
-                    $this->_current_driver = $extensions[$ext];
+                    $this->_current_driver = $extensions[$this->_ext];
                 }
                 else
                 {
