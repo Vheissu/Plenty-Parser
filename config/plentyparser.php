@@ -16,7 +16,10 @@ $config['parser.driver'] = "smarty";
 $config['parser.themes.enabled'] = false;
 
 // Where are themes located?
-$config['parser.themes.location'] = APPPATH . "themes";
+$config['parser.themes.locations'] = array(
+    APPPATH . "themes",
+    "../themes"
+);
 
 // Default theme to use
 $config['parser.themes.default'] = "";

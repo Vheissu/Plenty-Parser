@@ -25,6 +25,13 @@ class Plenty_parser extends CI_Driver_Library {
     protected $_current_driver;
     
     /**
+    * Current theme in use
+    * 
+    * @var mixed
+    */
+    protected $_current_theme;
+    
+    /**
     * Valid drivers for rendering views
     * 
     * @var mixed
@@ -57,6 +64,17 @@ class Plenty_parser extends CI_Driver_Library {
     public function set_driver($driver)
     {
         $this->_current_driver = trim($driver);
+    }
+    
+    /**
+    * Set Theme
+    * Set the currently used theme
+    * 
+    * @param mixed $theme
+    */
+    public function set_theme($theme)
+    {
+        $this->_current_theme = trim($theme);
     }
     
     /**

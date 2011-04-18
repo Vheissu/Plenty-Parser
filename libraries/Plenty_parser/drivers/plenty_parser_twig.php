@@ -23,7 +23,6 @@ class Plenty_parser_twig extends CI_Driver {
     
     public function __construct()
     {
-        
         $this->ci = get_instance();
         
         ini_set('include_path',
@@ -80,6 +79,21 @@ class Plenty_parser_twig extends CI_Driver {
         {
             return $template->display($data); 
         }
+    }
+    
+    /**
+    * Parse String
+    * Parse a string and return it as a string or display it
+    * 
+    * @param mixed $string
+    * @param mixed $data
+    * @param mixed $return
+    * @returns void
+    */
+    public function parse_string($string, $data = array(), $return = false)
+    {
+        // Coming soon
+        return true;
     }
 
 }
