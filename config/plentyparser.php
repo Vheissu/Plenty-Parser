@@ -12,6 +12,9 @@
 // Default driver to render views with
 $config['parser.driver'] = "smarty";
 
+// Is the theming system enabled or disabled
+$config['parser.themes.enabled'] = false;
+
 // Where are themes located?
 $config['parser.themes.location'] = APPPATH . "themes";
 

@@ -95,6 +95,20 @@ class Plenty_parser extends CI_Driver_Library {
         
         // Call the driver parse function
         return $this->{$this->_current_driver}->parse($template, $data, $return);
+    }
+    
+    /**
+    * Parse String
+    * Parse a string and return it as a string or display it
+    * 
+    * @param mixed $string
+    * @param mixed $data
+    * @param mixed $return
+    * @returns void
+    */
+    public function parse_string($string, $data = array(), $return = false)
+    {
+        return $this->{$this->_current_driver}->parse_string($string, $data, $return);
     } 
     
 }
