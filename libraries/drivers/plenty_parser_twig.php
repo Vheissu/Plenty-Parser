@@ -43,9 +43,32 @@ class Plenty_parser_twig extends CI_Driver {
         $this->_template_dir = $location;
     }
 	
+    /**
+    * Load the template and return the data
+    * 
+    * @param mixed $template
+    * @param mixed $data
+    * @returns string
+    */
 	public function parse($template, $data = array())
     {
-        
+        $template = $this->_twig->loadTemplate($template);
+
+        return $template->render($data);
+    }
+    
+    /**
+    * Displays an actual template for use
+    * 
+    * @param mixed $template
+    * @param mixed $data
+    * @returns void
+    */
+    public function display($template, $data = array()) 
+    {
+        $template = $this->_twig->loadTemplate($template);
+
+        $template->display($data);
     }
 
 }
