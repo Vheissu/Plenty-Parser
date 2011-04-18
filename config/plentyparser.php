@@ -13,3 +13,12 @@ $config['parser.extensions'] = array(
 	'.twig' => "twig",
 	".php"  => "parser"
 );
+
+// Default template location
+$config['parser.twig.location'] = APPPATH . "views";
+
+// Twig template caching location
+$config['parser.twig.cache_location'] = APPPATH . "cache";
+
+// Debug mode turned on or off for Twig?
+$config['parser.twig.debug'] = false;
