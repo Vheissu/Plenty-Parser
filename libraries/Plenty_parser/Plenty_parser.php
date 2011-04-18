@@ -46,6 +46,13 @@ class Plenty_parser extends CI_Driver_Library {
     protected $_theme_locations;
     
     /**
+    * Are theming capabilities enabled or disabled?
+    * 
+    * @var mixed
+    */
+    protected $_theme_enabled;
+    
+    /**
     * Valid drivers for rendering views
     * 
     * @var mixed
@@ -72,6 +79,9 @@ class Plenty_parser extends CI_Driver_Library {
         
         // Get default theme (if one set)
         $this->_default_theme = config_item('parser.theme.default');
+        
+        // Get whether or not themes are enabled or disabled
+        $this->_theme_enabled = config_item('parser.theme.enabled');
     }
     
     /**
