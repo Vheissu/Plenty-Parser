@@ -136,7 +136,16 @@ class Plenty_parser extends CI_Driver_Library {
     */
     public function set_theme($theme)
     {
-        $this->_theme = trim($theme);
+        $theme = trim($trim);
+        
+        if ($theme == $this->_current_theme)
+        {
+            return true;
+        }
+        else
+        {
+            $this->_current_theme = $theme;   
+        }
     }
     
     /**
