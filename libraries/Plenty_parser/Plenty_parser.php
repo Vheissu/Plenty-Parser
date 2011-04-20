@@ -43,7 +43,7 @@ class Plenty_parser extends CI_Driver_Library {
     * 
     * @var mixed
     */
-    protected $_theme_locations;
+    protected $_theme_locations = array();
     
     /**
     * Are theming capabilities enabled or disabled?
@@ -82,6 +82,26 @@ class Plenty_parser extends CI_Driver_Library {
         
         // Get whether or not themes are enabled or disabled
         $this->_theme_enabled = config_item('parser.theme.enabled');
+        
+        // Call the init function
+        $this->_init();
+    }
+    
+    /**
+    * Init
+    * Populates variables and other things
+    * @returns void
+    */
+    private function _init()
+    {
+        foreach (config_item('parser.theme.locations') AS $path)
+        {
+            // If path isn't already in our array of paths
+            if ( !array_key_exists($path, $this->_theme_directories) )
+            {
+                $this->_theme_directories[$path];
+            }
+        }
     }
     
     /**
@@ -98,13 +118,32 @@ class Plenty_parser extends CI_Driver_Library {
     
     /**
     * Set Theme
-    * Set the currently used theme
+    * Set the theme name we're using
     * 
     * @param mixed $theme
+    * @returns void
     */
     public function set_theme($theme)
     {
-        $this->_current_theme = trim($theme);
+        $this->_theme = trim($theme);
+    }
+    
+    /**
+    * Add Theme Location
+    * Add a new theme location
+    * 
+    * @param mixed $location
+    * @returns void
+    */
+    public function add_theme_location($location)
+    {
+        // If path isn't already in our array of paths
+        if ( !array_key_exists($location, $this->_theme_locations) )
+        {
+            $this->_theme_locations[$location];
+        }
+        
+        return true;
     }
     
     /**
@@ -121,6 +160,7 @@ class Plenty_parser extends CI_Driver_Library {
     }
     
     /**
+    * Parse
     * Parse will return the contents instead of displaying
     * 
     * @param mixed $template
