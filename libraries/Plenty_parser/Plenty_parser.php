@@ -115,7 +115,16 @@ class Plenty_parser extends CI_Driver_Library {
     */
     public function set_driver($driver)
     {
-        $this->_current_driver = trim($driver);
+        $driver = trim($driver);
+        
+        if ($driver === $this->_current_driver)
+        {
+            return true;
+        }
+        else
+        {
+            $this->_current_driver = $driver;   
+        }
     }
     
     /**
