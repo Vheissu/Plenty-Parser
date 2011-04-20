@@ -205,7 +205,15 @@ class Plenty_parser extends CI_Driver_Library {
         // Add in the extension using the default if not supplied
         if (!stripos($template, "."))
         {
-            $template = $template.config_item('parser.'.$this->_current_driver.'.extension');
+            // If we have a parser template extension defined
+            if (config_item('parser.'.$this->_current_driver.'.extension'))
+            {
+                $template = $template.config_item('parser.'.$this->_current_driver.'.extension');   
+            }
+            else
+            {
+                show_error('No extension has been defined for the driver "'.$this->_current_driver.'". Please define one in the plentyparser.php config file.');
+            }
         }
         
         // Call the driver parse function
