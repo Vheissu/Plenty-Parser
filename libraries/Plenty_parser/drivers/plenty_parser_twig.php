@@ -33,7 +33,10 @@ class Plenty_parser_twig extends CI_Driver {
         
         $this->_template_dir = config_item('parser.twig.location');
         $this->_cache_dir    = config_item('parser.twig.cache_location');
-        $this->_debug        = config_item('parser.twig.debug');     
+        $this->_debug        = config_item('parser.twig.debug');
+        
+        // Check if a theme has been set and if there is, check it exists and add it to the path
+             
     }
     
     /**
@@ -87,7 +90,7 @@ class Plenty_parser_twig extends CI_Driver {
     */
     public function parse_string($string, $data = array(), $return = false)
     {
-        $loader = new Twig_Loader_String();
+        $loader = new Twig_Loader_String($this->_template_dir);
 
         $twig = new Twig_Environment($loader, array(
             'cache' => $this->_cache_dir,
