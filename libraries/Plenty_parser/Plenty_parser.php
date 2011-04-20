@@ -74,9 +74,6 @@ class Plenty_parser extends CI_Driver_Library {
         // Get our default driver
         $this->_current_driver = config_item('parser.driver');
         
-        // Get theme locations
-        $this->_theme_locations = config_item('parser.theme.locations');
-        
         // Get default theme (if one set)
         $this->_default_theme = config_item('parser.theme.default');
         
@@ -94,12 +91,17 @@ class Plenty_parser extends CI_Driver_Library {
     */
     private function _init()
     {
-        foreach (config_item('parser.theme.locations') AS $path)
+        // Is theming capability enabled
+        if ($this->_theme_enabled)
         {
-            // If path isn't already in our array of paths
-            if ( !array_key_exists($path, $this->_theme_directories) )
+            // Get all paths defined in the config file and add them to our array
+            foreach (config_item('parser.theme.locations') AS $path)
             {
-                $this->_theme_directories[$path];
+                // If path isn't already in our array of paths
+                if ( !array_key_exists($path, $this->_theme_locations) )
+                {
+                    $this->_theme_locations[$path];
+                }
             }
         }
     }
