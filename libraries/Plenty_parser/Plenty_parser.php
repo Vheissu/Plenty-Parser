@@ -103,6 +103,13 @@ class Plenty_parser extends CI_Driver_Library {
                     $this->_theme_locations[$path];
                 }
             }
+            
+            // If no theme is set and we have a default, use that
+            if ( empty($this->_current_theme) AND !empty($this->_default_theme) )
+            {
+                $this->_current_theme = $this->_default_theme;
+            }
+            
         }
     }
     
