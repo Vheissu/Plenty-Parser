@@ -26,7 +26,6 @@ $config['parser.theme.default'] = "";
 
 
 
-
 // Twig template extension (default)
 $config['parser.twig.extension'] = ".twig";
 
@@ -55,6 +54,3 @@ $config['parser.smarty.cache_dir'] = APPPATH . "cache/smarty";
 
 // Smarty configs directory
 $config['parser.smarty.config_dir'] = APPPATH."third_party/Smarty/configs";
-
-// Smarty error level
-$config['parser.smarty.error_level'] = "E_ERROR";

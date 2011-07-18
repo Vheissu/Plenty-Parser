@@ -32,7 +32,7 @@ class Plenty_parser_smarty extends CI_Driver {
         $this->_smarty->compile_dir       = config_item('parser.smarty.compile_dir');
         $this->_smarty->cache_dir         = config_item('parser.smarty.cache_dir');
         $this->_smarty->config_dir        = config_item('parser.smarty.config_dir');
-        $this->_smarty->error_reporting   = config_item('parser.smarty.error_level');
+        $this->_smarty->error_reporting   = error_reporting();
         
         $this->_smarty->exception_handler = null; 
     }
