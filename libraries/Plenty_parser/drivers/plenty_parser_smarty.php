@@ -32,10 +32,10 @@ class Plenty_parser_smarty extends CI_Driver {
         $this->_smarty->compile_dir     = config_item('parser.smarty.compile_dir');
         $this->_smarty->cache_dir       = config_item('parser.smarty.cache_dir');
         $this->_smarty->config_dir      = config_item('parser.smarty.config_dir');
-        $this->_smarty->cache           = config_item('parser.smarty.cache_status');
-        $this->_smarty->cache_liftime   = config_item('parser.smarty.cache_lifetime');
+        $this->_smarty->cache_lifetime  = config_item('parser.smarty.cache_lifetime');
         
-        $this->_smarty->exception_handler = null;
+        // Should let us access Codeigniter stuff in views
+        $this->assign_var("CI", $this->ci);
         
         $this->_smarty->disableSecurity(); 
     }
