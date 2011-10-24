@@ -47,13 +47,13 @@ $config['parser.smarty.extension'] = ".php";
 $config['parser.smarty.location'] = APPPATH . "views";
 
 // Where compiled Smarty templates will reside
-$config['parser.smarty.compile_dir'] = APPPATH . "cache/smarty/compiled";
+$config['parser.smarty.compile_dir'] = APPPATH . "cache/smarty/compiled/";
 
 // Where Smarty caching happens
-$config['parser.smarty.cache_dir'] = APPPATH . "cache/smarty";
+$config['parser.smarty.cache_dir'] = APPPATH . "cache/smarty/";
 
 // Smarty configs directory
-$config['parser.smarty.config_dir'] = APPPATH."third_party/Smarty/configs";
+$config['parser.smarty.config_dir'] = APPPATH."third_party/Smarty/configs/";
 
 // Smarty caching enabled by default unless explicitly set to 0
 $config['parser.smarty.cache_status'] = 1;

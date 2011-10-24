@@ -34,9 +34,10 @@ class Plenty_parser_smarty extends CI_Driver {
         $this->_smarty->config_dir      = config_item('parser.smarty.config_dir');
         $this->_smarty->cache           = config_item('parser.smarty.cache_status');
         $this->_smarty->cache_liftime   = config_item('parser.smarty.cache_lifetime');
-        $this->_smarty->error_reporting = error_reporting();
         
-        $this->_smarty->exception_handler = null; 
+        $this->_smarty->exception_handler = null;
+        
+        $this->_smarty->disableSecurity(); 
     }
     
     /**
@@ -68,13 +69,7 @@ class Plenty_parser_smarty extends CI_Driver {
     * @param mixed $return
     */
     public function parse($template, $data = array(), $return = false)
-    {
-        // Check we haven't got cached variables to use
-        if (is_array($data))
-        {
-            $data = array_merge($data, $this->ci->load->_ci_cached_vars);
-        }
-        
+    {        
         // If we have variables to assign, lets assign them
         if ($data)
         {
