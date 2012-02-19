@@ -197,7 +197,7 @@ class Plenty_parser extends CI_Driver_Library {
     public function parse($template, $data = array(), $return = false, $driver = '')
     {
         // Are we setting a particular driver to render with?
-        if ($driver != '')
+        if ($driver !== '')
         {
             $this->_current_driver = trim($driver);
         }

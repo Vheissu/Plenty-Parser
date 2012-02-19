@@ -18,7 +18,7 @@ $config['parser.theme.enabled'] = false;
 // Where are themes located?
 $config['parser.theme.locations'] = array(
     APPPATH . "themes",
-    "../themes"
+    FCPATH . "themes"
 );
 
 // Default theme to use
@@ -33,7 +33,7 @@ $config['parser.twig.extension'] = ".twig";
 $config['parser.twig.location'] = APPPATH . "views";
 
 // Twig template caching location
-$config['parser.twig.cache_location'] = APPPATH . "cache/twig";
+$config['parser.twig.cache_location'] = APPPATH . "cache/twig/";
 
 // Debug mode turned on or off for Twig?
 $config['parser.twig.debug'] = false;
