@@ -64,6 +64,10 @@ class Plenty_parser_twig extends CI_Driver {
     */
 	public function parse($template, $data = array(), $return = false)
     {
+        if (stripos($template, '.') === false) {
+            $template . config_item('parser.twig.extension');
+        }
+
         $template = $this->_twig->loadTemplate($template);
         
         if ( is_array($data) ) {
