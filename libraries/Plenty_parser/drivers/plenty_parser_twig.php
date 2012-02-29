@@ -13,6 +13,8 @@
 class Plenty_parser_twig extends CI_Driver {
     
     protected $ci;
+
+    protected $_twig;
     
     protected $_template;
     
@@ -28,12 +30,15 @@ class Plenty_parser_twig extends CI_Driver {
         ini_get('include_path') . PATH_SEPARATOR . APPPATH . 'third_party/Twig');
 
         require_once (string) "Autoloader" . EXT;
-        
+
         Twig_Autoloader::register();
-        
-        $this->_template_dir = config_item('parser.twig.location');
-        $this->_cache_dir    = config_item('parser.twig.cache_location');
-        $this->_debug        = config_item('parser.twig.debug');
+
+        $loader = new Twig_Loader_Filesystem($this->_template_dir);
+
+        $this->_twig = new Twig_Environment($loader, array(
+            'cache' => $this->_cache_dir,
+            'debug' => $this->_debug,
+        ));
         
         // Check if a theme has been set and if there is, check it exists and add it to the path
              
@@ -59,22 +64,15 @@ class Plenty_parser_twig extends CI_Driver {
     */
 	public function parse($template, $data = array(), $return = false)
     {
-        $loader = new Twig_Loader_Filesystem($this->_template_dir);
-        $twig   = new Twig_Environment($loader, array('cache' => $this->_cache_dir,'debug' => $this->_debug));
-         
-        $template = $twig->loadTemplate($template);
+        $template = $this->_twig->loadTemplate($template);
         
-        if (is_array($data))
-        {
-            $data = array_merge($data, $this->ci->load->_ci_cached_vars);
+        if ( is_array($data) ) {
+            $data = array_merge($data, $this->ci->load->get_vars());
         }
         
-        if ($return === true)
-        {
+        if ( $return === true ) {
             return $template->render($data);   
-        }
-        else
-        {
+        } else {
             return $template->display($data); 
         }
     }
@@ -90,27 +88,17 @@ class Plenty_parser_twig extends CI_Driver {
     */
     public function parse_string($string, $data = array(), $return = false)
     {
-        $loader = new Twig_Loader_String($this->_template_dir);
-
-        $twig = new Twig_Environment($loader, array(
-            'cache' => $this->_cache_dir,
-            'debug' => $this->_debug,
-        ));
+        $string = $this->_twig->loadTemplate($string);
         
-        $string = $twig->loadTemplate($string);
-        
-        if (is_array($data))
+        if ( is_array($data) )
         {
-            $data = array_merge($data, $this->ci->load->_ci_cached_vars);
+            $data = array_merge($data, $this->ci->load->get_vars());
         }
         
-        if ($return === true)
-        {
-            return $template->render($data);
-        }
-        else
-        {
-            return $template->display($data);
+        if ($return === true) {
+            return $string->render($data);
+        } else {
+            return $string->display($data);
         }
         
     }
