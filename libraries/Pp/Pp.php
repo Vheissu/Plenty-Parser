@@ -8,7 +8,7 @@
 * @version 1.0
 */
 
-class Plenty_parser extends CI_Driver_Library {
+class Pp extends CI_Driver_Library {
     
     /**
     * Codeigniter instance
@@ -58,8 +58,8 @@ class Plenty_parser extends CI_Driver_Library {
     * @var mixed
     */
     protected $valid_drivers = array(
-        'plenty_parser_smarty',
-        'plenty_parser_twig',
+        'pp_smarty',
+        'pp_twig',
     );
     
     /**
@@ -143,7 +143,7 @@ class Plenty_parser extends CI_Driver_Library {
     */
     public function set_theme($theme)
     {
-        $theme = trim($trim);
+        $theme = trim($theme);
         
         if ($theme == $this->_current_theme)
         {

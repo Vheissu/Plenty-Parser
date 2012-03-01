@@ -10,7 +10,7 @@
 * @version 1.0
 */
 
-class Plenty_parser_twig extends CI_Driver {
+class Pp_twig extends CI_Driver {
     
     protected $ci;
 
@@ -64,19 +64,27 @@ class Plenty_parser_twig extends CI_Driver {
     */
 	public function parse($template, $data = array(), $return = false)
     {
-        if (stripos($template, '.') === false) {
+        // If we do not have a template extension, use the default
+        if (stripos($template, '.') === false)
+        {
             $template . config_item('parser.twig.extension');
         }
 
+        // Load the template
         $template = $this->_twig->loadTemplate($template);
-        
-        if ( is_array($data) ) {
+
+        // If data supplied is an array
+        if ( is_array($data) )
+        {
             $data = array_merge($data, $this->ci->load->get_vars());
         }
         
-        if ( $return === true ) {
+        if ( $return === true )
+        {
             return $template->render($data);   
-        } else {
+        }
+        else
+        {
             return $template->display($data); 
         }
     }
@@ -99,9 +107,12 @@ class Plenty_parser_twig extends CI_Driver {
             $data = array_merge($data, $this->ci->load->get_vars());
         }
         
-        if ($return === true) {
+        if ($return === true)
+        {
             return $string->render($data);
-        } else {
+        }
+        else
+        {
             return $string->display($data);
         }
         
