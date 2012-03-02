@@ -33,6 +33,10 @@ class Pp_smarty extends CI_Driver {
         $this->_smarty->setCacheDir(config_item('parser.smarty.cache_dir'));
         $this->_smarty->setConfigDir(config_item('parser.smarty.config_dir'));
 
+        // Add helper directories as plugin directories
+        $this->_smarty->addPluginsDir(FCPATH . 'system/helpers/');
+        $this->_smarty->addPluginsDir(APPPATH . 'helpers/');
+
         // Delimiters
         $this->_smarty->left_delimiter  = config_item("parser.smarty.left.delim");
         $this->_smarty->right_delimiter = config_item("parser.smarty.right.delim");
@@ -42,6 +46,11 @@ class Pp_smarty extends CI_Driver {
         
         // Should let us access Codeigniter stuff in views
         $this->assign_var("CI", $this->ci);
+
+        // Codeigniter base constants as variables.
+        $this->assign_var('APPPATH',APPPATH);
+        $this->assign_var('BASEPATH',BASEPATH);
+        $this->assign_var('FCPATH',FCPATH);
 
         // Disable Smarty security policy
         $this->_smarty->disableSecurity(); 
