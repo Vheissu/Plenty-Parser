@@ -109,4 +109,20 @@ class Pp_smarty extends CI_Driver {
         return $this->_smarty->fetch('string:'.$string, $data);
     }
 
+
+    /**
+     * Registers plugin to be used in templates
+     *
+     * @param string $type plugin type
+     * @param string $tag name of template tag
+     * @param callback $callback PHP callback to register
+     * @param boolean $cacheable if true (default) this fuction is cachable
+     * @param array $cache_attr caching attributes if any
+     * @throws SmartyException when the plugin tag is invalid
+     */
+    public function register_plugin($type, $tag, $callback, $cacheable = true, $cache_attr = null)
+    {
+        return $this->_smarty->registerPlugin($type, $tag, $callback, $cacheable, $cache_attr);
+    }
+
 }
