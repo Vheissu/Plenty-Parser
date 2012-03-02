@@ -54,6 +54,26 @@ class Pp_twig extends CI_Driver {
     {
         $this->_template_dir = $location;
     }
+
+    /**
+     * Assign Var
+     * Assign a variable for template view use
+     *
+     * @param mixed $name
+     * @param mixed $val
+     * @returns void
+     */
+    public function assign_var($name, $val)
+    {
+        // If an empty variable name
+        if (empty($name))
+        {
+            show_error('Smarty assign var function expects a name and value for assigning variables');
+        }
+
+        // Call Smarty assign function
+        $this->_smarty->assign($name, $val);
+    }
 	
     /**
     * Load the template and return the data
@@ -116,6 +136,16 @@ class Pp_twig extends CI_Driver {
             return $string->display($data);
         }
         
+    }
+
+    /**
+     * Register Plugin
+     * Registers a plugin for use in a Twig template.
+     * @param $name
+     */
+    public function register_plugin($name)
+    {
+        $this->_twig->addFunction($name, new Twig_Function_Function($name));
     }
 
 }

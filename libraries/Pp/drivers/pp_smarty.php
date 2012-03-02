@@ -57,8 +57,8 @@ class Pp_smarty extends CI_Driver {
     */
     public function assign_var($name, $val)
     {
-        // If an empty variable name or value supplied
-        if (empty($name) OR empty($val))
+        // If an empty variable name
+        if (empty($name))
         {
             show_error('Smarty assign var function expects a name and value for assigning variables');
         }
