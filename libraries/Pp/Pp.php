@@ -115,19 +115,18 @@ class Pp extends CI_Driver_Library {
     
     /**
     * Call
-    * abble to call native Smarty metods
+    * able to call native Smarty methods
     * @returns void
     */
     public function __call($method, $params=array())
     {
 		
-		if(!method_exists($this, $method))
+	if(!method_exists($this, $method))
         {
-			call_user_func_array(array($this->{$this->_current_driver}, $method), $params);
+		call_user_func_array(array($this->{$this->_current_driver}, $method), $params);
 			
-		}
 	}
-    
+    }
     
     /**
     * Set Driver
