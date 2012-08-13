@@ -53,7 +53,25 @@ class Pp_smarty extends CI_Driver {
         $this->assign_var('FCPATH',FCPATH);
 
         // Disable Smarty security policy
-        $this->_smarty->disableSecurity(); 
+        $this->_smarty->disableSecurity();
+        
+        // Turn on/off debug
+	$this->_smarty->debugging  = config_item('parser.smarty.debug');
+    }
+    
+    /**
+    * Call
+    * able to call native Smarty methods
+    * @returns void
+    */
+    public function __call($method, $params=array())
+    {
+		
+	if(!method_exists($this, $method))
+        {
+		call_user_func_array(array($this->_smarty, $method), $params);
+			
+	}
     }
     
     /**
