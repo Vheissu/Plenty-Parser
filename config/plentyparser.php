@@ -66,3 +66,6 @@ $config['parser.smarty.cache_status'] = 1;
 
 // Cache lifetime. Default value is 3600 seconds (1 hour) Smarty's default value
 $config['parser.smarty.cache_lifetime'] = 3600;
+
+// Debug mode turned on or off?
+$config['parser.smarty.debug'] = false;
