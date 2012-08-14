@@ -68,4 +68,4 @@ $config['parser.smarty.cache_status'] = 1;
 $config['parser.smarty.cache_lifetime'] = 3600;
 
 // Debug mode turned on or off?
-$config['parser.smarty.debug'] = true;
+$config['parser.smarty.debug'] = false;
